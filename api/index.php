@@ -6,7 +6,7 @@
     <title>Valentine Invitation</title>
     <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png"/>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap");
 
         body {
             background: #ffe6ea;
@@ -26,43 +26,40 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 320px;
             max-width: 85%;
             margin: 20px;
             z-index: 10;
             position: relative;
         }
 
-        h1 { font-size: 38px; color: #d63384; margin-bottom: 20px; position: relative; z-index: 1; }
+        h1 { font-size: 34px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
         
-        /* New style for the pookie text */
+        /* Updated style for pookie text: Smaller & Modern Font */
         .pookie-text {
-            font-size: 30px;
-            color: #d63384;
-            margin-top: -10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            color: #666;
+            margin-top: 5px;
             margin-bottom: 10px;
-            font-weight: bold;
+            font-weight: 600;
+            letter-spacing: 0.5px;
         }
 
-        .success-text { 
-            font-size: 30px; 
-            color: #d63384; 
-            line-height: 1.4; 
-            font-weight: bold; 
-            padding: 10px; 
-        }
+        .success-text { font-size: 28px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
 
         .btn-container {
             display: flex;
             gap: 20px;
             justify-content: center;
             align-items: center;
-            min-height: 150px;
+            min-height: 120px;
             position: relative;
         }
 
         button {
-            padding: 15px 30px;
-            font-size: 25px;
+            padding: 12px 25px;
+            font-size: 20px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
@@ -72,15 +69,7 @@
         }
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
-        
-        /* Fixed: Highest z-index to stay on top of EVERYTHING */
-        .no { 
-            background-color: #6c757d; 
-            color: white; 
-            position: fixed; 
-            z-index: 9999; 
-            white-space: nowrap;
-        }
+        .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
 
         .heart {
             position: fixed;
@@ -94,18 +83,18 @@
             to { transform: translateY(100vh) rotate(360deg); }
         }
 
-        img { border-radius: 15px; margin-bottom: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; }
+        img { border-radius: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="../nanobombs-cat.png" width="280" alt="Valentine Cat">
+            <img src="../nanobombs-cat.png" width="250" alt="Valentine Cat">
             
-            <p class="pookie-text">Take this flower pookie bhabhi</p>
+            <p class="pookie-text">take the flower pookie bhabhi</p>
             
-            <h1>Will you be my online valentine for today Ms? 😅</h1>
+            <h1>Will you be my valentine for today Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
@@ -139,21 +128,14 @@
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         
-        const phrases = [
-            "No", "yrr please", "again😭", "🥹pls ms", 
-            "Don't do this", "Ek baar soch lo", "Maafi dedo 😅",
-            "Jaan loge kya? 💀", "Last chance!"
-        ];
-        
+        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
         let phraseIndex = 0;
 
         function moveButton() {
-            // Cycle through phrases
             phraseIndex = (phraseIndex + 1) % phrases.length;
             noBtn.innerText = phrases[phraseIndex];
 
-            // Calculate safe random position
-            const padding = 40;
+            const padding = 50;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
             
@@ -163,15 +145,13 @@
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
 
-            // Make the Yes button grow slightly
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (currentSize < 60) { 
-                yesBtn.style.fontSize = (currentSize + 4) + 'px';
-                yesBtn.style.padding = (currentSize + 4) + 'px';
+            if (currentSize < 50) { 
+                yesBtn.style.fontSize = (currentSize + 3) + 'px';
+                yesBtn.style.padding = (currentSize + 3) + 'px';
             }
         }
 
-        // Add both hover and touch support
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
