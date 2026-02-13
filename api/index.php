@@ -3,138 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine Invitation</title>
+    <title>For You Ms. 🌹</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap");
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #ffe6ea;
-            text-align: center;
-            font-family: "Great Vibes", cursive;
-            overflow: hidden; 
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Animation in Background */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            animation: floatUp 6s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            width: 320px;
-            max-width: 85%;
-            margin: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
             z-index: 10;
-            position: relative;
+            border: 2px solid #fff;
         }
 
-        /* --- THE 3D-EFFECT ROSE --- */
-        .rose-container {
-            height: 200px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-            perspective: 1000px;
-        }
+        /* Improved CSS Rose */
+        .rose-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .rose { position: relative; animation: sway 3s infinite ease-in-out; }
+        .petal { width: 50px; height: 50px; background: #d63384; border-radius: 50% 50% 0 50%; transform: rotate(-45deg); box-shadow: inset 10px 10px #b02a6b; }
+        .stem { width: 5px; height: 80px; background: #2d6a4f; margin: -10px auto 0; border-radius: 5px; }
+        .leaf { width: 30px; height: 15px; background: #2d6a4f; border-radius: 15px 0; position: absolute; top: 70px; left: 15px; transform: rotate(-20deg); }
 
-        .rose {
-            position: relative;
-            transform-style: preserve-3d;
-            animation: sway 4s infinite ease-in-out;
-        }
+        @keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 
-        .petal-layered {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 45px;
-            height: 45px;
-            background: #d63384;
-            border-radius: 50% 50% 10% 50%;
-            transform-origin: bottom center;
-            box-shadow: inset 2px 2px 10px rgba(0,0,0,0.2);
-        }
+        .pookie-text { font-size: 16px; color: #d63384; font-weight: 600; margin: 15px 0; letter-spacing: 1px; }
+        
+        h1 { font-family: 'Dancing Script', cursive; font-size: 36px; color: #333; margin-bottom: 30px; line-height: 1.2; }
 
-        /* Layering for the 3D look */
-        .petal-layered:nth-child(1) { transform: translateX(-50%) rotateY(0deg) rotateX(25deg); }
-        .petal-layered:nth-child(2) { transform: translateX(-50%) rotateY(72deg) rotateX(30deg); opacity: 0.9; }
-        .petal-layered:nth-child(3) { transform: translateX(-50%) rotateY(144deg) rotateX(25deg); opacity: 0.8; }
-        .petal-layered:nth-child(4) { transform: translateX(-50%) rotateY(216deg) rotateX(30deg); opacity: 0.9; }
-        .petal-layered:nth-child(5) { transform: translateX(-50%) rotateY(288deg) rotateX(25deg); opacity: 0.8; }
-
-        .rose-stem-dark {
-            position: absolute;
-            width: 5px;
-            height: 130px;
-            background: linear-gradient(#2d6a4f, #1b4332);
-            left: 48%;
-            top: 25px;
-            z-index: -1;
-            border-radius: 3px;
-        }
-
-        .rose-leaf-left {
-            position: absolute;
-            width: 30px;
-            height: 15px;
-            background: #2d6a4f;
-            border-radius: 20px 0;
-            top: 70px;
-            left: 20px;
-            transform: rotate(-35deg);
-        }
-
-        @keyframes sway {
-            0%, 100% { transform: rotate(-4deg); }
-            50% { transform: rotate(4deg); }
-        }
-
-        /* --- TEXT & BUTTONS --- */
-        h1 { font-size: 32px; color: #d63384; margin: 15px 0; line-height: 1.2; }
-        .pookie-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: #d63384; font-weight: 600; margin-bottom: 15px; }
-        .btn-container { display: flex; gap: 20px; justify-content: center; align-items: center; min-height: 150px; position: relative; }
+        .btn-container { position: relative; height: 150px; display: flex; justify-content: center; align-items: center; gap: 20px; }
         
         button {
-            padding: 12px 25px;
-            font-size: 20px;
+            padding: 15px 35px;
+            font-size: 18px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            font-weight: bold;
-            transition: all 0.2s ease;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
-        .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
+        .yes { background: #ff4d6d; color: white; box-shadow: 0 8px 15px rgba(255, 77, 109, 0.4); z-index: 5; }
+        .yes:hover { transform: scale(1.1); }
 
-        .success-text { font-size: 28px; color: #d63384; font-weight: bold; line-height: 1.4; }
-        .heart { position: fixed; top: -10px; font-size: 20px; animation: fall linear forwards; z-index: 100; }
-        @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
+        .no { background: #6c757d; color: white; position: fixed; z-index: 9999; }
+
+        /* Success Screen */
+        .success-text { font-family: 'Dancing Script', cursive; font-size: 32px; color: #d63384; line-height: 1.5; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <div class="rose-container">
+            <div class="rose-box">
                 <div class="rose">
-                    <div class="petal-layered"></div>
-                    <div class="petal-layered"></div>
-                    <div class="petal-layered"></div>
-                    <div class="petal-layered"></div>
-                    <div class="petal-layered"></div>
-                    <div class="rose-stem-dark"></div>
-                    <div class="rose-leaf-left"></div>
+                    <div class="petal"></div>
+                    <div class="stem"></div>
+                    <div class="leaf"></div>
                 </div>
             </div>
             
             <p class="pookie-text">take this flower pookie bhabhi</p>
-            <h1>Will you be my valentine Ms? 😅</h1>
+            <h1>Will you be my valentine for today Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
@@ -150,11 +109,13 @@
                 this life enjoy with bhaiyaa ♥️
             </div>
             <script>
+                // Celebrate with hearts on success
                 function createHeart() {
                     const heart = document.createElement('div');
-                    heart.classList.add('heart');
+                    heart.classList.add('bg-heart');
                     heart.innerHTML = '❤️';
                     heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
                     heart.style.animationDuration = Math.random() * 2 + 3 + 's';
                     document.body.appendChild(heart);
                     setTimeout(() => heart.remove(), 5000);
@@ -165,9 +126,23 @@
     </div>
 
     <script>
+        // Background Hearts
+        function createBgHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createBgHeart, 400);
+
+        // No Button Logic
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
+        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Ek baar soch lo", "Maafi dedo 😅"];
         let i = 0;
 
         function moveButton() {
@@ -177,11 +152,12 @@
             const yesRect = yesBtn.getBoundingClientRect();
             let newX, newY, isOverlapping;
 
-            // Safe Zone Logic: Ensures "No" button never spawns over "Yes"
+            // Safe Zone Logic: Move No button but avoid Yes button area
             do {
                 newX = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
                 newY = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
                 
+                // Check if the new No position overlaps with Yes button (+ safe margin)
                 isOverlapping = (
                     newX < yesRect.right + 60 &&
                     newX + noBtn.offsetWidth > yesRect.left - 60 &&
@@ -192,11 +168,12 @@
 
             noBtn.style.left = newX + 'px';
             noBtn.style.top = newY + 'px';
-
-            let size = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (size < 55) {
-                yesBtn.style.fontSize = (size + 3) + 'px';
-                yesBtn.style.padding = (size + 4) + 'px';
+            
+            // Grow the Yes button
+            let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            if (currentSize < 50) {
+                yesBtn.style.fontSize = (currentSize + 2) + 'px';
+                yesBtn.style.padding = (currentSize + 3) + 'px';
             }
         }
 
