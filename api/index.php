@@ -65,7 +65,7 @@
     <main>
         <form action="index.php" method="post">
             <h1>
-                Will you be my valentine for today ms?😅🙏
+                Will you be my online valentine for today Ms?😅
                 
 
             </h1>
