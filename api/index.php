@@ -33,7 +33,7 @@
             position: relative;
         }
 
-        h1 { font-size: 34px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
+        h1 { font-size: 32px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; line-height: 1.2; }
         
         /* Modern, small font for the sub-text */
         .pookie-text {
@@ -70,7 +70,7 @@
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
         
-        /* Keep NO button on the very top layer */
+        /* High z-index to stay on top of EVERYTHING */
         .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
 
         .heart {
@@ -85,14 +85,14 @@
             to { transform: translateY(100vh) rotate(360deg); }
         }
 
-        img { border-radius: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; }
+        img { border-radius: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://raw.githubusercontent.com/vizer770/valentine-invitation/main/nanobombs-cat.png" width="250" alt="Valentine Cat">
+            <img src="https://i.ibb.co/v4m0YmC/1000026836.jpg" width="250" alt="Valentine Cat">
             
             <p class="pookie-text">take the flower pookie bhabhi</p>
             
@@ -130,6 +130,7 @@
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         
+        // Prank phrases for the "No" button
         const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
         let phraseIndex = 0;
 
@@ -154,6 +155,7 @@
             }
         }
 
+        // Makes the No button run away
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
