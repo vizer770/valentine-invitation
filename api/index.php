@@ -37,12 +37,11 @@
         
         .pookie-text {
             font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            color: #888;
+            font-size: 15px;
+            color: #d63384;
             margin-top: 10px;
-            margin-bottom: 0px;
+            margin-bottom: 5px;
             font-weight: 600;
-            text-transform: lowercase;
         }
 
         .success-text { font-size: 28px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
@@ -89,11 +88,11 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://i.postimg.cc/8z0K06mG/pookie-cat.jpg" width="250" alt="Valentine Cat">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZpZzB3eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCBmcm9tX2dpZmh5/3o7TKoWXlo3M1nKSYw/giphy.gif" width="250" alt="Rose for you">
             
-            <p class="pookie-text">take the flower pookie bhabhi</p>
+            <p class="pookie-text">take this flower pookie bhabhi</p>
             
-            <h1>Will you be my online valentine for today Ms? 😅</h1>
+            <h1>Will you be my valentine Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
@@ -141,8 +140,8 @@
             noBtn.style.top = randomY + 'px';
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             if (currentSize < 45) { 
-                yesBtn.style.fontSize = (currentSize + 3) + 'px';
-                yesBtn.style.padding = (currentSize + 3) + 'px';
+                yesBtn.style.fontSize = (currentSize + 2) + 'px';
+                yesBtn.style.padding = (currentSize + 2) + 'px';
             }
         }
 
