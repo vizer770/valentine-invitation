@@ -35,7 +35,6 @@
 
         h1 { font-size: 32px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; line-height: 1.2; }
         
-        /* Modern, small font for the sub-text */
         .pookie-text {
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
@@ -69,8 +68,6 @@
         }
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
-        
-        /* High z-index to stay on top of EVERYTHING */
         .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
 
         .heart {
@@ -92,7 +89,7 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://i.ibb.co/v4m0YmC/1000026836.jpg" width="250" alt="Valentine Cat">
+            <img src="https://i.postimg.cc/8z0K06mG/pookie-cat.jpg" width="250" alt="Valentine Cat">
             
             <p class="pookie-text">take the flower pookie bhabhi</p>
             
@@ -129,33 +126,26 @@
     <script>
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        
-        // Prank phrases for the "No" button
         const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
         let phraseIndex = 0;
 
         function moveButton() {
             phraseIndex = (phraseIndex + 1) % phrases.length;
             noBtn.innerText = phrases[phraseIndex];
-
             const padding = 50;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-            
             const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
             const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-            
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
-
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (currentSize < 50) { 
+            if (currentSize < 45) { 
                 yesBtn.style.fontSize = (currentSize + 3) + 'px';
                 yesBtn.style.padding = (currentSize + 3) + 'px';
             }
         }
 
-        // Makes the No button run away
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
