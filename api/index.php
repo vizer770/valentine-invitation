@@ -20,7 +20,7 @@
             position: relative;
         }
 
-        /* Floating Hearts Animation in Background */
+        /* Background Hearts */
         .bg-heart {
             position: absolute;
             color: rgba(255, 255, 255, 0.5);
@@ -28,9 +28,22 @@
             z-index: 0;
         }
 
+        /* Falling Hearts for Success Page */
+        .falling-heart {
+            position: fixed;
+            top: -50px;
+            font-size: 24px;
+            z-index: 100;
+            animation: drop linear forwards;
+        }
+
         @keyframes floatUp {
             0% { transform: translateY(100vh) scale(0); opacity: 1; }
             100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+
+        @keyframes drop {
+            to { transform: translateY(110vh) rotate(360deg); }
         }
 
         .container {
@@ -46,7 +59,6 @@
             border: 2px solid #fff;
         }
 
-        /* Improved CSS Rose */
         .rose-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
         .rose { position: relative; animation: sway 3s infinite ease-in-out; }
         .petal { width: 50px; height: 50px; background: #d63384; border-radius: 50% 50% 0 50%; transform: rotate(-45deg); box-shadow: inset 10px 10px #b02a6b; }
@@ -56,7 +68,6 @@
         @keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
 
         .pookie-text { font-size: 16px; color: #d63384; font-weight: 600; margin: 15px 0; letter-spacing: 1px; }
-        
         h1 { font-family: 'Dancing Script', cursive; font-size: 36px; color: #333; margin-bottom: 30px; line-height: 1.2; }
 
         .btn-container { position: relative; height: 150px; display: flex; justify-content: center; align-items: center; gap: 20px; }
@@ -72,11 +83,8 @@
         }
 
         .yes { background: #ff4d6d; color: white; box-shadow: 0 8px 15px rgba(255, 77, 109, 0.4); z-index: 5; }
-        .yes:hover { transform: scale(1.1); }
-
         .no { background: #6c757d; color: white; position: fixed; z-index: 9999; }
 
-        /* Success Screen */
         .success-text { font-family: 'Dancing Script', cursive; font-size: 32px; color: #d63384; line-height: 1.5; }
     </style>
 </head>
@@ -109,24 +117,24 @@
                 this life enjoy with bhaiyaa ♥️
             </div>
             <script>
-                // Celebrate with hearts on success
-                function createHeart() {
+                // Dropping Heart Animation for 2nd Page
+                function createDroppingHeart() {
                     const heart = document.createElement('div');
-                    heart.classList.add('bg-heart');
+                    heart.classList.add('falling-heart');
                     heart.innerHTML = '❤️';
                     heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.fontSize = Math.random() * 20 + 20 + 'px';
                     heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+                    heart.style.opacity = Math.random();
                     document.body.appendChild(heart);
                     setTimeout(() => heart.remove(), 5000);
                 }
-                setInterval(createHeart, 300);
+                setInterval(createDroppingHeart, 200);
             </script>
         <?php endif; ?>
     </div>
 
     <script>
-        // Background Hearts
+        // Floating Background Hearts for Page 1
         function createBgHeart() {
             const heart = document.createElement('div');
             heart.classList.add('bg-heart');
@@ -139,7 +147,7 @@
         }
         setInterval(createBgHeart, 400);
 
-        // No Button Logic
+        // No Button logic with Safe Zone overlap fix
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
         const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Ek baar soch lo", "Maafi dedo 😅"];
@@ -147,29 +155,24 @@
 
         function moveButton() {
             noBtn.innerText = phrases[++i % phrases.length];
-            
             const padding = 50;
             const yesRect = yesBtn.getBoundingClientRect();
-            let newX, newY, isOverlapping;
+            let newX, newY, overlap;
 
-            // Safe Zone Logic: Move No button but avoid Yes button area
             do {
                 newX = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
                 newY = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
-                
-                // Check if the new No position overlaps with Yes button (+ safe margin)
-                isOverlapping = (
+                overlap = (
                     newX < yesRect.right + 60 &&
                     newX + noBtn.offsetWidth > yesRect.left - 60 &&
                     newY < yesRect.bottom + 60 &&
                     newY + noBtn.offsetHeight > yesRect.top - 60
                 );
-            } while (isOverlapping);
+            } while (overlap);
 
             noBtn.style.left = newX + 'px';
             noBtn.style.top = newY + 'px';
             
-            // Grow the Yes button
             let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             if (currentSize < 50) {
                 yesBtn.style.fontSize = (currentSize + 2) + 'px';
