@@ -35,15 +35,15 @@
 
         h1 { font-size: 34px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; }
         
-        /* Updated style for pookie text: Smaller & Modern Font */
+        /* Modern, small font for the sub-text */
         .pookie-text {
             font-family: 'Poppins', sans-serif;
-            font-size: 16px;
-            color: #666;
-            margin-top: 5px;
-            margin-bottom: 10px;
+            font-size: 14px;
+            color: #888;
+            margin-top: 10px;
+            margin-bottom: 0px;
             font-weight: 600;
-            letter-spacing: 0.5px;
+            text-transform: lowercase;
         }
 
         .success-text { font-size: 28px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
@@ -69,6 +69,7 @@
         }
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
+        /* Keep NO button on the very top layer */
         .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
 
         .heart {
@@ -90,9 +91,9 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="../nanobombs-cat.png" width="250" alt="Valentine Cat">
+            <img src="nanobombs-cat.png" width="250" alt="Valentine Cat">
             
-            <p class="pookie-text">take the flower pookie bhabhi</p>
+            <p class="pookie-text">take this flower pookie bhabhi</p>
             
             <h1>Will you be my valentine for today Ms? 😅</h1>
             
