@@ -65,7 +65,9 @@
     <main>
         <form action="index.php" method="post">
             <h1>
-                Will you be my valentine?
+                Will you be my valentine for today ms?😅🙏
+                
+
             </h1>
             <div class="btn-container">
                 <button type="submit" class="yes">yes</button>
@@ -98,6 +100,7 @@
 
 <?php
     if($_SERVER["REQUEST_METHOD"] == 'POST') {
-        echo "<p>Thank you</p>";
+        echo "<p>Thank you bhabhi , chalo koi to valentine bna 😅
+        </p>";
     }
 ?>
