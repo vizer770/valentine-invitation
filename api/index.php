@@ -3,96 +3,120 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine Invitation</title>
-    <link rel="icon" href="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png"/>
+    <title>For You Ms. 🌹</title>
     <style>
-        @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@400;600&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;600&display=swap");
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            background: #ffe6ea;
-            text-align: center;
-            font-family: "Great Vibes", cursive;
-            overflow: hidden; 
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            height: 100vh;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Floating Hearts Animation in Background */
+        .bg-heart {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.5);
+            animation: float Up 6s infinite linear;
+            z-index: 0;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(0); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
         }
 
         .container {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            width: 320px;
-            max-width: 85%;
-            margin: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 40px 20px;
+            border-radius: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            width: 350px;
+            max-width: 90%;
+            text-align: center;
             z-index: 10;
-            position: relative;
+            border: 2px solid #fff;
         }
 
-        h1 { font-size: 32px; color: #d63384; margin-top: 10px; margin-bottom: 20px; position: relative; z-index: 1; line-height: 1.2; }
+        /* Improved CSS Rose */
+        .rose-box { height: 160px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
+        .rose { position: relative; animation: sway 3s infinite ease-in-out; }
+        .petal { width: 50px; height: 50px; background: #d63384; border-radius: 50% 50% 0 50%; transform: rotate(-45deg); box-shadow: inset 10px 10px #b02a6b; }
+        .stem { width: 5px; height: 80px; background: #2d6a4f; margin: -10px auto 0; border-radius: 5px; }
+        .leaf { width: 30px; height: 15px; background: #2d6a4f; border-radius: 15px 0; position: absolute; top: 70px; left: 15px; transform: rotate(-20deg); }
+
+        @keyframes sway { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+
+        .pookie-text { font-size: 16px; color: #d63384; font-weight: 600; margin: 15px 0; letter-spacing: 1px; }
         
-        .pookie-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 15px;
-            color: #d63384;
-            margin-top: 10px;
-            margin-bottom: 5px;
-            font-weight: 600;
-        }
+        h1 { font-family: 'Dancing Script', cursive; font-size: 36px; color: #333; margin-bottom: 30px; line-height: 1.2; }
 
-        .success-text { font-size: 28px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
-
-        .btn-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            min-height: 120px;
-            position: relative;
-        }
-
+        .btn-container { position: relative; height: 150px; display: flex; justify-content: center; align-items: center; gap: 20px; }
+        
         button {
-            padding: 12px 25px;
-            font-size: 20px;
+            padding: 15px 35px;
+            font-size: 18px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            transition: all 0.2s ease;
-            font-family: sans-serif;
-            font-weight: bold;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
-        .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
+        .yes { background: #ff4d6d; color: white; box-shadow: 0 8px 15px rgba(255, 77, 109, 0.4); z-index: 5; }
+        .yes:hover { transform: scale(1.1); }
 
-        .heart {
+        .no { background: #6c757d; color: white; position: fixed; z-index: 9999; }
+
+        /* Success Screen */
+        .success-text { font-family: 'Dancing Script', cursive; font-size: 32px; color: #d63384; line-height: 1.5; }
+        
+        .sound-btn {
             position: fixed;
-            top: -10px;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             font-size: 20px;
-            animation: fall linear forwards;
             z-index: 100;
         }
-
-        @keyframes fall {
-            to { transform: translateY(100vh) rotate(360deg); }
-        }
-
-        img { border-radius: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; display: block; margin: 0 auto; }
     </style>
 </head>
 <body>
 
+    <audio id="bgMusic" loop>
+        <source src="https://www.chosic.com/wp-content/uploads/2021/07/The-Kiss-From-A-Rose.mp3" type="audio/mpeg">
+    </audio>
+
+    <div class="sound-btn" onclick="toggleMusic()">🎵</div>
+
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZpZzB3eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCBmcm9tX2dpZmh5/3o7TKoWXlo3M1nKSYw/giphy.gif" width="250" alt="Rose for you">
+            <div class="rose-box">
+                <div class="rose">
+                    <div class="petal"></div>
+                    <div class="stem"></div>
+                    <div class="leaf"></div>
+                </div>
+            </div>
             
             <p class="pookie-text">take this flower pookie bhabhi</p>
-            
-            <h1>Will you be my valentine Ms? 😅</h1>
+            <h1>Will you be my valentine for today Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
@@ -107,49 +131,52 @@
                 hope next life aapko date pe leke jau ☺️ <br>
                 this life enjoy with bhaiyaa ♥️
             </div>
-            <script>
-                function createHeart() {
-                    const heart = document.createElement('div');
-                    heart.classList.add('heart');
-                    heart.innerHTML = '❤️';
-                    heart.style.left = Math.random() * 100 + 'vw';
-                    heart.style.animationDuration = Math.random() * 2 + 3 + 's';
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 5000);
-                }
-                setInterval(createHeart, 300);
-            </script>
         <?php endif; ?>
     </div>
 
     <script>
+        // Music Toggle
+        function toggleMusic() {
+            const music = document.getElementById('bgMusic');
+            return music.paused ? music.play() : music.pause();
+        }
+
+        // Background Hearts
+        function createBgHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('bg-heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+            heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createBgHeart, 400);
+
+        // No Button Logic
         const noBtn = document.getElementById('noBtn');
         const yesBtn = document.getElementById('yesBtn');
-        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
-        let phraseIndex = 0;
+        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Ek baar soch lo", "Maafi dedo 😅"];
+        let i = 0;
 
         function moveButton() {
-            phraseIndex = (phraseIndex + 1) % phrases.length;
-            noBtn.innerText = phrases[phraseIndex];
-            const padding = 50;
-            const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-            const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-            noBtn.style.left = randomX + 'px';
-            noBtn.style.top = randomY + 'px';
-            const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (currentSize < 45) { 
+            noBtn.innerText = phrases[++i % phrases.length];
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            
+            // Grow the Yes button
+            let currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
+            if (currentSize < 50) {
                 yesBtn.style.fontSize = (currentSize + 2) + 'px';
-                yesBtn.style.padding = (currentSize + 2) + 'px';
+                yesBtn.style.padding = (currentSize + 3) + 'px';
             }
         }
 
         noBtn.addEventListener('mouseover', moveButton);
-        noBtn.addEventListener('touchstart', (e) => {
-            e.preventDefault();
-            moveButton();
-        });
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveButton(); });
     </script>
 </body>
 </html>
