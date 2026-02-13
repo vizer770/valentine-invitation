@@ -17,7 +17,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+            min-height: 100vh;
             margin: 0;
         }
 
@@ -26,17 +26,21 @@
             padding: 30px;
             border-radius: 20px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            max-width: 90%;
+            max-width: 85%;
+            margin: 20px;
+            z-index: 10;
         }
 
-        h1 { font-size: 45px; color: #d63384; margin-bottom: 20px; }
+        h1 { font-size: 38px; color: #d63384; margin-bottom: 20px; }
+        .success-text { font-size: 32px; color: #d63384; line-height: 1.4; font-weight: bold; }
 
         .btn-container {
             display: flex;
             gap: 20px;
             justify-content: center;
             align-items: center;
-            height: 100px;
+            min-height: 150px;
+            position: relative;
         }
 
         button {
@@ -45,54 +49,51 @@
             border-radius: 50px;
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             font-family: sans-serif;
             font-weight: bold;
         }
 
-        .yes { background-color: #ff4d6d; color: white; box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4); }
-        .yes:hover { transform: scale(1.2); }
-
-        .no { background-color: #6c757d; color: white; position: relative; }
-
-        .success-msg { color: #d63384; font-size: 50px; animation: pop 0.5s ease-out; }
-        
-        @keyframes pop {
-            0% { transform: scale(0); }
-            100% { transform: scale(1); }
-        }
+        .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 20; }
+        .no { background-color: #6c757d; color: white; position: relative; z-index: 15; }
 
         .heart {
             position: fixed;
             top: -10px;
             font-size: 20px;
             animation: fall linear forwards;
+            z-index: 100;
         }
 
         @keyframes fall {
             to { transform: translateY(100vh) rotate(360deg); }
         }
+
+        img { border-radius: 15px; margin-bottom: 15px; max-width: 100%; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZqZ3R5bmZqZ3R5bmZqZ3R5bmZqZ3R5bmZqZ3R5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCBmcm9tX2dpZmh5/c76IJLufpNwSULPk2m/giphy.gif" width="200" alt="Cute bear">
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbmZpZzB3eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6eXF6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCBmcm9tX2dpZmh5/3o7TKoWXlo3M1nKSYw/giphy.gif" width="250">
+            
             <h1>Will you be my online valentine for today Ms? 😅</h1>
-            <div class="btn-container">
+            
+            <div class="btn-container" id="mainContainer">
                 <form method="POST">
-                    <button type="submit" class="yes">Yes</button>
+                    <button type="submit" class="yes" id="yesBtn">Yes</button>
                 </form>
                 <button type="button" class="no" id="noBtn">No</button>
             </div>
         <?php else: ?>
-            <div class="success-msg">
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExOHpueGZ3bmZqZ3R5bmZqZ3R5bmZqZ3R5bmZqZ3R5bmZqZ3R5JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCBmcm9tX2dpZmh5/KztT2c4u8mYYUiMKdJ/giphy.gif" width="250"><br>
-                Thank you! I knew you'd say yes! ❤️
+            <div class="success-text">
+                Thank You Ms, <br><br>
+                and please don't mind, <br>
+                hope next life aapko date pe leke jau ☺️ <br>
+                this life enjoy with bhaiyaa ♥️
             </div>
             <script>
-                // Celebration Hearts
                 function createHeart() {
                     const heart = document.createElement('div');
                     heart.classList.add('heart');
@@ -109,27 +110,51 @@
 
     <script>
         const noBtn = document.getElementById('noBtn');
-        const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Think again!", "Last chance!"];
-        let count = 0;
+        const yesBtn = document.getElementById('yesBtn');
+        
+        // The phrases for the loop
+        const phrases = [
+            "No", 
+            "yrr please", 
+            "again😭", 
+            "🥹pls ms", 
+            "Don't do this", 
+            "Ek baar soch lo", 
+            "Maafi dedo 😅",
+            "Jaan loge kya? 💀",
+            "Last chance!"
+        ];
+        
+        let phraseIndex = 0;
 
-        noBtn.addEventListener('mouseover', () => {
-            // Move button to random position
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+        function moveButton() {
+            // 1. Update text loop
+            phraseIndex = (phraseIndex + 1) % phrases.length;
+            noBtn.innerText = phrases[phraseIndex];
+
+            // 2. Move button to random spot
+            // Using window dimensions minus button size to keep it on screen
+            const padding = 50;
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
             
-            noBtn.style.position = 'absolute';
+            noBtn.style.position = 'fixed';
             noBtn.style.left = x + 'px';
             noBtn.style.top = y + 'px';
 
-            // Change text in a loop
-            count++;
-            noBtn.innerText = phrases[count % phrases.length];
-            
-            // Make the Yes button bigger every time
-            const yesBtn = document.querySelector('.yes');
+            // 3. Make Yes button grow
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            yesBtn.style.fontSize = (currentSize + 5) + 'px';
-            yesBtn.style.padding = (currentSize + 5) + 'px';
+            if (currentSize < 80) { // Safety cap so it doesn't cover everything immediately
+                yesBtn.style.fontSize = (currentSize + 4) + 'px';
+                yesBtn.style.padding = (currentSize + 4) + 'px';
+            }
+        }
+
+        // Trigger on both Desktop (hover) and Mobile (touch)
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault(); // Prevents accidental clicking/scrolling
+            moveButton();
         });
     </script>
 </body>
