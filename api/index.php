@@ -33,7 +33,7 @@
         }
 
         h1 { font-size: 38px; color: #d63384; margin-bottom: 20px; }
-        .success-text { font-size: 32px; color: #d63384; line-height: 1.4; font-weight: bold; }
+        .success-text { font-size: 30px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
 
         .btn-container {
             display: flex;
@@ -57,7 +57,7 @@
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
         
-        /* Fixed z-index to 9999 so it never hides behind the Yes button */
+        /* Fixed: No button is now z-index 9999 to stay on top of everything */
         .no { 
             background-color: #6c757d; 
             color: white; 
@@ -85,9 +85,9 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="https://lh3.googleusercontent.com/d/1X6MhXU-7_E_m0Lh_X6_m0Lh_X6_m0Lh" width="280" alt="Take the flower pookie">
+            <img src="nanobombs-cat.png" width="280" alt="Valentine Cat">
             
-            <h1>Will you be my valentine for today Ms? 😅</h1>
+            <h1>Will you be my online valentine for today Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
@@ -130,12 +130,10 @@
         let phraseIndex = 0;
 
         function moveButton() {
-            // Cycle phrases
             phraseIndex = (phraseIndex + 1) % phrases.length;
             noBtn.innerText = phrases[phraseIndex];
 
-            // Random move logic
-            const padding = 30;
+            const padding = 40;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
             
@@ -145,9 +143,8 @@
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
 
-            // Yes button growth logic
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (currentSize < 65) { 
+            if (currentSize < 60) { 
                 yesBtn.style.fontSize = (currentSize + 4) + 'px';
                 yesBtn.style.padding = (currentSize + 4) + 'px';
             }
