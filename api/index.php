@@ -32,92 +32,73 @@
             position: relative;
         }
 
-        /* --- ADVANCED ANIMATED ROSE --- */
-        .rose-wrapper {
-            height: 180px;
+        /* --- THE MASTERPIECE ROSE --- */
+        .rose-container {
+            height: 200px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 10px;
+            perspective: 1000px;
         }
 
         .rose {
             position: relative;
-            width: 50px;
-            height: 50px;
-            animation: bloom 3s infinite ease-in-out, sway 4s infinite ease-in-out;
+            transform-style: preserve-3d;
+            animation: sway 4s infinite ease-in-out;
         }
 
-        .rose-petal {
+        .petal-layered {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            bottom: 0;
+            left: 50%;
+            width: 40px;
+            height: 40px;
             background: #d63384;
             border-radius: 50% 50% 10% 50%;
-            transform-origin: bottom right;
-            box-shadow: inset 5px 5px 15px rgba(0,0,0,0.2);
+            transform-origin: bottom center;
+            box-shadow: inset 2px 2px 10px rgba(0,0,0,0.2);
         }
 
-        /* Petal Layers */
-        .rose-petal:nth-child(1) { transform: rotate(0deg); }
-        .rose-petal:nth-child(2) { transform: rotate(72deg); opacity: 0.9; }
-        .rose-petal:nth-child(3) { transform: rotate(144deg); opacity: 0.8; }
-        .rose-petal:nth-child(4) { transform: rotate(216deg); opacity: 0.9; }
-        .rose-petal:nth-child(5) { transform: rotate(288deg); opacity: 0.8; }
+        /* Layering the petals for a realistic look */
+        .petal-layered:nth-child(1) { transform: translateX(-50%) rotateY(0deg) rotateX(20deg); }
+        .petal-layered:nth-child(2) { transform: translateX(-50%) rotateY(72deg) rotateX(25deg); opacity: 0.9; }
+        .petal-layered:nth-child(3) { transform: translateX(-50%) rotateY(144deg) rotateX(20deg); opacity: 0.8; }
+        .petal-layered:nth-child(4) { transform: translateX(-50%) rotateY(216deg) rotateX(25deg); opacity: 0.9; }
+        .petal-layered:nth-child(5) { transform: translateX(-50%) rotateY(288deg) rotateX(20deg); opacity: 0.8; }
 
-        .rose-center {
+        .rose-stem-dark {
             position: absolute;
-            width: 20px;
-            height: 20px;
-            background: #ff4d6d;
-            border-radius: 50%;
-            top: 15px;
-            left: 15px;
-            z-index: 2;
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
-        }
-
-        .rose-stem {
-            position: absolute;
-            width: 5px;
-            height: 100px;
-            background: #2d6a4f;
-            top: 45px;
-            left: 22px;
-            border-radius: 5px;
+            width: 4px;
+            height: 120px;
+            background: linear-gradient(#2d6a4f, #1b4332);
+            left: 48%;
+            top: 20px;
             z-index: -1;
+            border-radius: 2px;
         }
 
-        @keyframes bloom {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        .rose-leaf-left {
+            position: absolute;
+            width: 25px;
+            height: 12px;
+            background: #2d6a4f;
+            border-radius: 15px 0;
+            top: 60px;
+            left: 25px;
+            transform: rotate(-30deg);
         }
 
         @keyframes sway {
-            0%, 100% { transform: rotate(-5deg); }
-            50% { transform: rotate(5deg); }
+            0%, 100% { transform: rotate(-4deg); }
+            50% { transform: rotate(4deg); }
         }
 
         /* --- TEXT & BUTTONS --- */
         h1 { font-size: 32px; color: #d63384; margin: 15px 0; line-height: 1.2; }
+        .pookie-text { font-family: 'Poppins', sans-serif; font-size: 14px; color: #888; font-weight: 600; margin-bottom: 15px; }
+        .btn-container { display: flex; gap: 20px; justify-content: center; align-items: center; min-height: 150px; position: relative; }
         
-        .pookie-text {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            color: #888;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .btn-container {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            align-items: center;
-            min-height: 120px;
-            position: relative;
-        }
-
         button {
             padding: 12px 25px;
             font-size: 20px;
@@ -125,6 +106,7 @@
             border: none;
             cursor: pointer;
             font-weight: bold;
+            transition: font-size 0.2s, padding 0.2s;
         }
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
@@ -139,15 +121,15 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <div class="rose-wrapper">
+            <div class="rose-container">
                 <div class="rose">
-                    <div class="rose-petal"></div>
-                    <div class="rose-petal"></div>
-                    <div class="rose-petal"></div>
-                    <div class="rose-petal"></div>
-                    <div class="rose-petal"></div>
-                    <div class="rose-center"></div>
-                    <div class="rose-stem"></div>
+                    <div class="petal-layered"></div>
+                    <div class="petal-layered"></div>
+                    <div class="petal-layered) "></div>
+                    <div class="petal-layered"></div>
+                    <div class="petal-layered"></div>
+                    <div class="rose-stem-dark"></div>
+                    <div class="rose-leaf-left"></div>
                 </div>
             </div>
             
@@ -188,21 +170,40 @@
         const phrases = ["No", "yrr please", "again😭", "🥹pls ms", "Don't do this", "Ek baar soch lo", "Maafi dedo 😅"];
         let i = 0;
 
-        function move() {
+        function moveButton() {
             noBtn.innerText = phrases[++i % phrases.length];
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - 50);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - 50);
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
+            
+            // Safe Zone Logic: Move No button but avoid Yes button area
+            const padding = 50;
+            const yesRect = yesBtn.getBoundingClientRect();
+            let newX, newY, isOverlapping;
+
+            do {
+                newX = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding);
+                newY = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding);
+                
+                // Check if the new No position overlaps with Yes button (+ some extra space)
+                isOverlapping = (
+                    newX < yesRect.right + 50 &&
+                    newX + noBtn.offsetWidth > yesRect.left - 50 &&
+                    newY < yesRect.bottom + 50 &&
+                    newY + noBtn.offsetHeight > yesRect.top - 50
+                );
+            } while (isOverlapping);
+
+            noBtn.style.left = newX + 'px';
+            noBtn.style.top = newY + 'px';
+
+            // Grow Yes button
             let size = parseFloat(window.getComputedStyle(yesBtn).fontSize);
-            if (size < 45) {
-                yesBtn.style.fontSize = (size + 2) + 'px';
-                yesBtn.style.padding = (size + 2) + 'px';
+            if (size < 55) {
+                yesBtn.style.fontSize = (size + 3) + 'px';
+                yesBtn.style.padding = (size + 4) + 'px';
             }
         }
 
-        noBtn.addEventListener('mouseover', move);
-        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); move(); });
+        noBtn.addEventListener('mouseover', moveButton);
+        noBtn.addEventListener('touchstart', (e) => { e.preventDefault(); moveButton(); });
     </script>
 </body>
 </html>
