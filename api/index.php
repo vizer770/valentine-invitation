@@ -69,6 +69,7 @@
         }
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
+        
         /* Keep NO button on the very top layer */
         .no { background-color: #6c757d; color: white; position: fixed; z-index: 9999; white-space: nowrap; }
 
@@ -91,11 +92,11 @@
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="nanobombs-cat.png" width="250" alt="Valentine Cat">
+            <img src="https://raw.githubusercontent.com/vizer770/valentine-invitation/main/nanobombs-cat.png" width="250" alt="Valentine Cat">
             
-            <p class="pookie-text">take this flower pookie bhabhi</p>
+            <p class="pookie-text">take the flower pookie bhabhi</p>
             
-            <h1>Will you be my valentine for today Ms? 😅</h1>
+            <h1>Will you be my online valentine for today Ms? 😅</h1>
             
             <div class="btn-container">
                 <form method="POST">
