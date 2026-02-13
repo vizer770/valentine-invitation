@@ -32,8 +32,24 @@
             position: relative;
         }
 
-        h1 { font-size: 38px; color: #d63384; margin-bottom: 20px; }
-        .success-text { font-size: 30px; color: #d63384; line-height: 1.4; font-weight: bold; padding: 10px; }
+        h1 { font-size: 38px; color: #d63384; margin-bottom: 20px; position: relative; z-index: 1; }
+        
+        /* New style for the pookie text */
+        .pookie-text {
+            font-size: 30px;
+            color: #d63384;
+            margin-top: -10px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .success-text { 
+            font-size: 30px; 
+            color: #d63384; 
+            line-height: 1.4; 
+            font-weight: bold; 
+            padding: 10px; 
+        }
 
         .btn-container {
             display: flex;
@@ -57,7 +73,7 @@
 
         .yes { background-color: #ff4d6d; color: white; position: relative; z-index: 5; }
         
-        /* Fixed: No button is now z-index 9999 to stay on top of everything */
+        /* Fixed: Highest z-index to stay on top of EVERYTHING */
         .no { 
             background-color: #6c757d; 
             color: white; 
@@ -78,14 +94,16 @@
             to { transform: translateY(100vh) rotate(360deg); }
         }
 
-        img { border-radius: 15px; margin-bottom: 15px; max-width: 100%; height: auto; }
+        img { border-radius: 15px; margin-bottom: 15px; max-width: 100%; height: auto; position: relative; z-index: 1; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <?php if ($_SERVER["REQUEST_METHOD"] != 'POST'): ?>
-            <img src="nanobombs-cat.png" width="280" alt="Valentine Cat">
+            <img src="../nanobombs-cat.png" width="280" alt="Valentine Cat">
+            
+            <p class="pookie-text">Take this flower pookie bhabhi</p>
             
             <h1>Will you be my online valentine for today Ms? 😅</h1>
             
@@ -130,9 +148,11 @@
         let phraseIndex = 0;
 
         function moveButton() {
+            // Cycle through phrases
             phraseIndex = (phraseIndex + 1) % phrases.length;
             noBtn.innerText = phrases[phraseIndex];
 
+            // Calculate safe random position
             const padding = 40;
             const maxX = window.innerWidth - noBtn.offsetWidth - padding;
             const maxY = window.innerHeight - noBtn.offsetHeight - padding;
@@ -143,6 +163,7 @@
             noBtn.style.left = randomX + 'px';
             noBtn.style.top = randomY + 'px';
 
+            // Make the Yes button grow slightly
             const currentSize = parseFloat(window.getComputedStyle(yesBtn).fontSize);
             if (currentSize < 60) { 
                 yesBtn.style.fontSize = (currentSize + 4) + 'px';
@@ -150,6 +171,7 @@
             }
         }
 
+        // Add both hover and touch support
         noBtn.addEventListener('mouseover', moveButton);
         noBtn.addEventListener('touchstart', (e) => {
             e.preventDefault();
